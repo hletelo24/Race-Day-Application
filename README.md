@@ -21,7 +21,8 @@ The application has been developed with the following tech stack:
 * .NET 8 Framework
 * Git
 * GitHub
-* GitHub Actions<br/>
+* GitHub Actions
+<br/>
 All these technologies work together to enable the website to function optimally in production environments.
 
 ## CI/CD Implementation
