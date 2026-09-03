@@ -13,7 +13,7 @@ The website offers the following roles to manage actions and operations:
 * <strong>Participant</strong>: This user role reflects the role of a normal user. Normal users can view events, join events and view their results.
 * <strong>Organiser</strong>: The organiser role is an admin role that is able to manage all entities within the database schema of the website.
 
-## TechStack
+## Website TechStack
 The application has been developed with the following tech stack:
 * C#
 * Visual Studio 2022
