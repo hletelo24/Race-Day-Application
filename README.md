@@ -1,4 +1,4 @@
-# Race-Day-Application
+# Race-Day-Website
 Race Day is modern website that brings sporting events and participants together in fully online experience. The website is built to allow participants to join events and be a part of sporting action around the coutry.
 ## Overview
 Race Day is powerful online platform that brings events and participants together in a seamless experience. The website is developed to perform the following functions
