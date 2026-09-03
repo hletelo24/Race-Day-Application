@@ -23,6 +23,6 @@ All these technologies work together to enable the website to function optimally
 At this stage of the website's development phase, there are GitHub actions that have been set up and they are as follows:
 * Build and check project structure: This checks the project structure and ensures that the docs files exists.
 The following screenshot shows output of a successful build action run on GitHub actions.
-<img src="docs/RaceDay ERD" alt="Screenshot of successful action build"/>
+<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/Screenshot%202026-09-03%20151216.png" alt="Screenshot of successful action build"/>
 
 ## Thank you
