@@ -23,10 +23,12 @@ All these technologies work together to enable the website to function optimally
 At this stage of the website's development phase, there are GitHub actions that have been set up and they are as follows:
 * Build and check project structure: This checks the project structure and ensures that the docs files exists.
 The following screenshot shows output of a successful build action run on GitHub actions.
+
 <img src="https://github.com/hletelo24/Race-Day-Application/blob/main/Screenshot%202026-09-03%20151216.png" alt="Screenshot of successful action build"/>
 
 ## Database implementation
 The website has been connected to an SQL database that uses a Microsoft SQL Server engine. A complete database generation script has been generated and is accessible in the docs folder of the repository. The execution screenshot has been placed below:
-<imag src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%202026-09-03%20151619.png" alt="Database script execution" />
+
+<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%202026-09-03%20151619.png" alt="Database script execution" />
 
 ## Thank you
