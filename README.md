@@ -26,5 +26,5 @@ The following screenshot shows output of a successful build action run on GitHub
 <img src="https://github.com/hletelo24/Race-Day-Application/blob/main/Screenshot%202026-09-03%20151216.png" alt="Screenshot of successful action build"/>
 ## Database implementation
 The website has been connected to an SQL database that uses a Microsoft SQL Server engine. A complete database generation script has been generated and is accessible in the docs folder of the repository. The execution screenshot has been placed below:
-<imag src="" alt="Database script execution" />
+<imag src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%202026-09-03%20151619.png" alt="Database script execution" />
 ## Thank you
