@@ -40,7 +40,7 @@ The application has been integrated with unit tests using xUnit. These unit test
 ## Unit testing - CI/CD GitHub Workflows
 This repository makes use of GitHub workflows to automate unit testing. This makes the unit tests to run automatically in when new commits are created on the repository. The following screenshot clearly shows the tests running after CI/CD execution:
 
-<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%20(22).png" alt="Screenshot of local unit testing"/>
+<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%20(23).png" alt="Screenshot of local unit testing"/>
 
 ## Database implementation
 The website has been connected to an SQL database that uses a Microsoft SQL Server engine. A complete database generation script has been generated and is accessible in the docs folder of the repository. The execution screenshot has been placed below:
