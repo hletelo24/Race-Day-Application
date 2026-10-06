@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "hletelo24-patch-2" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "hletelo24-patch-2" ]
 
 jobs:
   build:
