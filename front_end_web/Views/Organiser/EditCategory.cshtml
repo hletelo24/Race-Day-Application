@@ -1,0 +1,66 @@
+﻿@model front_end_web.Models.Organiser.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<section class="container py-5 category-page">
+    <div class="category-form-card">
+        <div class="category-form-heading">
+            <div class="category-form-icon">
+                <i class="bi bi-pencil-square"></i>
+            </div>
+            <span class="category-eyebrow">CATEGORY MANAGEMENT</span>
+            <h1 class="fw-bold mt-2">Edit Category</h1>
+            <p class="text-muted">
+                Update the details of @Model.Title.
+            </p>
+        </div>
+
+        <form asp-controller="Organiser"
+              asp-action="EditCategory"
+              asp-route-id="@Model.CategoryId"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            <input asp-for="CategoryId" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger"></div>
+
+            <div class="mb-4">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title"
+                       class="form-control form-control-lg"
+                       maxlength="150" />
+                <span asp-validation-for="Title"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description"
+                          class="form-control"
+                          rows="5"
+                          maxlength="1000"></textarea>
+                <span asp-validation-for="Description"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-category-primary">
+                    <i class="bi bi-save me-2"></i>Save Changes
+                </button>
+
+                <a asp-action="Categories"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,69 @@
+﻿@model front_end_web.Models.Organiser.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<section class="container py-5 category-page">
+    <div class="category-form-card">
+        <div class="category-form-heading">
+            <div class="category-form-icon">
+                <i class="bi bi-plus-circle"></i>
+            </div>
+            <span class="category-eyebrow">CATEGORY MANAGEMENT</span>
+            <h1 class="fw-bold mt-2">Create Category</h1>
+            <p class="text-muted">
+                Enter the title and description for your new category.
+            </p>
+        </div>
+
+        <form asp-controller="Organiser"
+              asp-action="CreateCategory"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger"></div>
+
+            <div class="mb-4">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title"
+                       class="form-control form-control-lg"
+                       placeholder="e.g. 10 km Open Category"
+                       maxlength="150"
+                       autofocus />
+                <span asp-validation-for="Title"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description"
+                          class="form-control"
+                          rows="5"
+                          maxlength="1000"
+                          placeholder="Describe the category and its purpose..."></textarea>
+                <span asp-validation-for="Description"
+                      class="text-danger"></span>
+                <div class="form-text">
+                    Optional. Maximum 1,000 characters.
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-category-primary">
+                    <i class="bi bi-check-lg me-2"></i>Create Category
+                </button>
+
+                <a asp-action="Categories"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

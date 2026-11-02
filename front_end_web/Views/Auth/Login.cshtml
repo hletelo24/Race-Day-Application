@@ -1,0 +1,91 @@
+﻿@model front_end_web.Models.Auth.LoginViewModel
+
+@{
+    ViewData["Title"] = "Sign In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-card">
+            <div class="auth-heading">
+                <div class="auth-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+
+                <span class="section-label">WELCOME BACK</span>
+                <h1>Sign in to <span>RaceDay</span></h1>
+                <p>Pick up where your racing journey left off.</p>
+            </div>
+
+            @if (TempData["SuccessMessage"] is string success)
+            {
+                <div class="alert alert-success" role="status">
+                    @success
+                </div>
+            }
+
+            <form asp-controller="Auth"
+                  asp-action="Login"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <input type="hidden"
+                       name="returnUrl"
+                       value="@ViewData["ReturnUrl"]" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger"
+                     role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="EmailAddress"
+                           class="form-label">Email address</label>
+
+                    <input asp-for="EmailAddress"
+                           class="form-control form-control-lg"
+                           placeholder="you@example.com"
+                           autocomplete="email" />
+
+                    <span asp-validation-for="EmailAddress"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Password"
+                           class="form-label">Password</label>
+
+                    <input asp-for="Password"
+                           class="form-control form-control-lg"
+                           placeholder="Enter your password"
+                           autocomplete="current-password" />
+
+                    <span asp-validation-for="Password"
+                          class="text-danger"></span>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-raceday btn-lg w-100">
+                    Sign In
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+            </form>
+
+            <div class="auth-divider">
+                <span>NEW TO RACEDAY?</span>
+            </div>
+
+            <p class="text-center mb-0">
+                Don't have an account?
+                <a asp-controller="Auth"
+                   asp-action="Register"
+                   class="auth-link">Create one</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

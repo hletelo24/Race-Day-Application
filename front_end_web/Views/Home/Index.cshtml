@@ -1,0 +1,332 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hero Section -->
+<section class="raceday-hero">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-7 hero-content">
+                <span class="hero-badge">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    YOUR RACE. YOUR CHALLENGE.
+                </span>
+
+                <h1 class="hero-title mt-4">
+                    EVERY SECOND<br />
+                    <span>COUNTS.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Find your next challenge, register for exciting races,
+                    and track your progress with RaceDay. Your next finish
+                    line starts here.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-raceday btn-lg">
+                        Explore Events
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+
+                    <a asp-controller="Auth"
+                       asp-action="Register"
+                       class="btn btn-outline-light btn-lg">
+                        Join RaceDay
+                    </a>
+                </div>
+
+                <div class="hero-stats mt-5">
+                    <div>
+                        <h3>RUN</h3>
+                        <span>YOUR WAY</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div>
+                        <h3>RACE</h3>
+                        <span>YOUR LIMITS</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div>
+                        <h3>WIN</h3>
+                        <span>YOUR GOALS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="hero-visual">
+                    <div class="hero-number">01</div>
+                    <div class="hero-visual-text">
+                        <span>THE FINISH LINE</span>
+                        <h2>IS JUST<br />THE BEGINNING.</h2>
+                    </div>
+                    <div class="hero-circle"></div>
+                    <i class="bi bi-activity hero-activity"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Feature Strip -->
+<section class="feature-strip">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+                    <div>
+                        <h5>Discover Events</h5>
+                        <p>Find races that match your goals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+                    <div>
+                        <h5>Easy Enrolment</h5>
+                        <p>Choose your race and category.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                    <div>
+                        <h5>Track Results</h5>
+                        <p>Follow your race history and progress.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events -->
+<section class="events-section py-5">
+    <div class="container">
+        <div class="section-heading d-flex flex-wrap
+            justify-content-between align-items-end gap-3 mb-4">
+            <div>
+                <span class="section-label">WHAT'S NEXT?</span>
+                <h2>UPCOMING <span>RACES</span></h2>
+                <p>Find your next challenge and get race-ready.</p>
+            </div>
+
+            <a asp-controller="Events"
+               asp-action="Index"
+               class="view-all-link">
+                View All Events
+                <i class="bi bi-arrow-up-right"></i>
+            </a>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Event Card 1 -->
+            <div class="col-md-6 col-lg-4">
+                <article class="event-card">
+                    <div class="event-image event-image-one">
+                        <span class="event-type">ROAD RUN</span>
+                        <div class="event-distance">10 KM</div>
+                    </div>
+
+                    <div class="event-card-body">
+                        <div class="event-date">
+                            <i class="bi bi-calendar3"></i>
+                            Upcoming event
+                        </div>
+
+                        <h4>City Road Challenge</h4>
+
+                        <p class="event-location">
+                            <i class="bi bi-geo-alt"></i>
+                            Event location to be announced
+                        </p>
+
+                        <div class="event-card-footer">
+                            <span class="event-category">
+                                Road Running
+                            </span>
+
+                            <a asp-controller="Events"
+                               asp-action="Index"
+                               class="event-link"
+                               aria-label="Explore road running events">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="col-md-6 col-lg-4">
+                <article class="event-card">
+                    <div class="event-image event-image-two">
+                        <span class="event-type">TRAIL RUN</span>
+                        <div class="event-distance">21 KM</div>
+                    </div>
+
+                    <div class="event-card-body">
+                        <div class="event-date">
+                            <i class="bi bi-calendar3"></i>
+                            Upcoming event
+                        </div>
+
+                        <h4>Mountain Trail Run</h4>
+
+                        <p class="event-location">
+                            <i class="bi bi-geo-alt"></i>
+                            Event location to be announced
+                        </p>
+
+                        <div class="event-card-footer">
+                            <span class="event-category">
+                                Trail Running
+                            </span>
+
+                            <a asp-controller="Events"
+                               asp-action="Index"
+                               class="event-link"
+                               aria-label="Explore trail running events">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="col-md-6 col-lg-4">
+                <article class="event-card">
+                    <div class="event-image event-image-three">
+                        <span class="event-type">CYCLING</span>
+                        <div class="event-distance">40 KM</div>
+                    </div>
+
+                    <div class="event-card-body">
+                        <div class="event-date">
+                            <i class="bi bi-calendar3"></i>
+                            Upcoming event
+                        </div>
+
+                        <h4>Endurance Challenge</h4>
+
+                        <p class="event-location">
+                            <i class="bi bi-geo-alt"></i>
+                            Event location to be announced
+                        </p>
+
+                        <div class="event-card-footer">
+                            <span class="event-category">
+                                Endurance
+                            </span>
+
+                            <a asp-controller="Events"
+                               asp-action="Index"
+                               class="event-link"
+                               aria-label="Explore endurance events">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+
+        <p class="demo-note mt-3">
+            Sample event cards for layout demonstration. Replace these with
+            events returned by your Part 2 API before submission.
+        </p>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">YOUR JOURNEY STARTS HERE</span>
+            <h2 class="section-title">RACE DAY MADE <span>SIMPLE.</span></h2>
+            <p class="text-muted">
+                Three steps between you and your next big achievement.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <i class="bi bi-search step-icon"></i>
+                    <h4>Find Your Race</h4>
+                    <p>
+                        Browse upcoming events and find a challenge
+                        that suits your interests and fitness level.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <i class="bi bi-clipboard-check step-icon"></i>
+                    <h4>Enrol Online</h4>
+                    <p>
+                        Sign in, select your preferred category,
+                        and keep track of your enrolment status.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <i class="bi bi-bar-chart-line step-icon"></i>
+                    <h4>Track Your Results</h4>
+                    <p>
+                        View your finishing times, positions, and
+                        results from completed events.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Organiser Call to Action -->
+<section class="organiser-section">
+    <div class="container">
+        <div class="organiser-banner">
+            <div>
+                <span class="section-label">FOR EVENT ORGANISERS</span>
+                <h2>HAVE A RACE TO RUN?</h2>
+                <p>
+                    Create events, manage participant enrolments,
+                    and publish race results from one platform.
+                </p>
+            </div>
+
+            <a asp-controller="Account"
+               asp-action="Register"
+               class="btn btn-raceday btn-lg">
+                Get Started
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>

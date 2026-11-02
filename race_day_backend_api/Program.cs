@@ -3,15 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using race_day_backend_api.Data;
+using race_day_backend_api.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//registration of BlobStorage Service
+builder.Services.AddScoped<IBlobStorageService, ImageStorageService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -46,8 +54,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
+
 
 
 // ======================================================
@@ -100,6 +107,17 @@ builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
+Console.WriteLine(
+    $"API environment: {app.Environment.EnvironmentName}");
+
+Console.WriteLine(
+    $"API content root: {app.Environment.ContentRootPath}");
+
+Console.WriteLine(
+    $"DbConnectionString configured: " +
+    !string.IsNullOrWhiteSpace(
+        builder.Configuration.GetConnectionString(
+            "DbConnectionString")));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

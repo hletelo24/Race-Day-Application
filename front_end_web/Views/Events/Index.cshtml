@@ -1,0 +1,56 @@
+﻿@model IEnumerable<front_end_web.Models.Events.EventViewModel>
+@{
+    ViewData["Title"] = "Discover Events";
+}
+<div class="container py-4">
+    <h1 class="fw-bold">Discover Events</h1>
+    <p class="text-muted">Choose a category to find a race that suits you.</p>
+    @if (TempData["Success"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+    <form method="get" asp-action="Index" class="card card-body mb-4">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-8">
+                <label class="form-label" for="categoryId">Category</label>
+                <select id="categoryId" name="categoryId" asp-items="ViewBag.Categories" class="form-select">
+                    <option value="">All categories</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-warning flex-grow-1">Find events</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
+            </div>
+        </div>
+    </form>
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.Title" class="card-img-top" style="height:190px;object-fit:cover;" />
+                    }
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge text-bg-warning align-self-start mb-2">@(item.CategoryTitle ?? $"Category #{item.CategoryId}")</span>
+                        <h5 class="fw-bold">@item.Title</h5>
+                        <p class="small text-muted">@item.Date.ToString("dd MMM yyyy") · @item.StartTime.ToString(@"hh\:mm")</p>
+                        <p><strong>Distance:</strong> @item.Distance km</p>
+                        <p><strong>Route:</strong> @item.StartLocation → @item.EndLocation</p>
+                        <p>@item.Description</p>
+                        <a asp-action="Details" asp-route-id="@item.EventId" class="btn btn-dark mt-auto">View event</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mt-4">No events found for this category.</div>
+    }
+</div>

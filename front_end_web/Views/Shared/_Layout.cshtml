@@ -1,0 +1,178 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - RaceDay</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/front_end_web.styles.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg raceday-navbar py-3">
+            <div class="container">
+
+                <a class="navbar-brand raceday-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    <i class="bi bi-activity"></i>
+                    RACE<span>DAY</span>
+                </a>
+
+                <button class="navbar-toggler bg-light"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse"
+                     id="mainNavbar">
+
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Events"
+                               asp-action="Index">
+                                Events
+                            </a>
+                        </li>
+
+                        @if (Context.Session.GetString("UserRole") == "Organiser")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Organiser"
+                                   asp-action="Dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-controller="Profile" asp-action="Index">
+                                    My Profile
+                                </a>
+                            </li>
+                        }
+
+                        @if (Context.Session.GetString("UserRole") == "Participant")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Events"
+                                   asp-action="MyEvents">
+                                    My Events
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Events"
+                                   asp-action="MyEnrolments">
+                                    My Enrolments
+                                </a>
+                            </li>
+                        }
+
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
+                            <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                                <form asp-controller="Auth"
+                                      asp-action="Logout"
+                                      method="post">
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn btn-raceday">
+                                        Sign Out
+                                        <i class="bi bi-box-arrow-right ms-1"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-lg-3">
+                                <a class="nav-link"
+                                   asp-controller="Auth"
+                                   asp-action="Login">
+                                    Sign In
+                                </a>
+                            </li>
+
+                            <li class="nav-item mt-2 mt-lg-0">
+                                <a class="btn btn-raceday"
+                                   asp-controller="Auth"
+                                   asp-action="Register">
+                                    Get Started
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="raceday-footer">
+        <div class="container d-flex flex-wrap
+                    justify-content-between align-items-center gap-3">
+            <div>
+                <strong class="text-white">
+                    RACE<span style="color:#ff6b24">DAY</span>
+                </strong>
+                <div class="small mt-1">
+                    Every second counts. Every finish matters.
+                </div>
+            </div>
+
+            <div class="small">
+                &copy; @DateTime.Now.Year RaceDay.
+                All rights reserved.
+                <a asp-controller="Home"
+                   asp-action="Privacy"
+                   class="ms-2">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

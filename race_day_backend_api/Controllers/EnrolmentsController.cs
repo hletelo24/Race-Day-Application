@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using race_day_backend_api.Data;
 using race_day_backend_api.Models;
 
@@ -406,7 +407,7 @@ namespace race_day_backend_api.Controllers
         [HttpPost]
         [Authorize(Roles = "Participant")]
         public async Task<IActionResult> CreateEnrolment(
-            [FromBody] Enrolment enrolmentModel)
+            [FromBody] EnrolmentCreateRequest request)
         {
             var userId = GetCurrentUserId();
 
@@ -437,7 +438,7 @@ namespace race_day_backend_api.Controllers
             // Validate EventId
             // --------------------------------------------------------
 
-            if (enrolmentModel.EventId <= 0)
+            if (request.EventId <= 0)
             {
                 return BadRequest(new
                 {
@@ -450,7 +451,7 @@ namespace race_day_backend_api.Controllers
             // --------------------------------------------------------
 
             var eventItem = await _context.Events
-                .FirstOrDefaultAsync(e => e.EventId == enrolmentModel.EventId);
+                .FirstOrDefaultAsync(e => e.EventId == request.EventId);
 
             if (eventItem == null)
             {
@@ -481,7 +482,7 @@ namespace race_day_backend_api.Controllers
 
             var alreadyEnrolled = await _context.Enrolments
                 .AnyAsync(e =>
-                    e.EventId == enrolmentModel.EventId &&
+                    e.EventId == request.EventId &&
                     e.UserId == userId.Value);
 
             if (alreadyEnrolled)
@@ -498,7 +499,7 @@ namespace race_day_backend_api.Controllers
 
             var enrolment = new Enrolment
             {
-                EventId = enrolmentModel.EventId,
+                EventId = request.EventId,
                 UserId = userId.Value,
                 CreatedAt = DateTime.UtcNow
             };
@@ -728,6 +729,16 @@ namespace race_day_backend_api.Controllers
                 enrolment.Result.EnrolmentId,
                 enrolment.Result.Time
             });
+        }
+
+        // Request body for POST api/Enrolments.
+        // The client sends only EventId. UserId is taken from the JWT,
+        // and Event/Participant navigation properties are loaded by EF Core
+        // relationships rather than supplied in the request body.
+        public sealed class EnrolmentCreateRequest
+        {
+            [Range(1, int.MaxValue, ErrorMessage = "A valid EventId is required.")]
+            public int EventId { get; set; }
         }
 
         // ============================================================
