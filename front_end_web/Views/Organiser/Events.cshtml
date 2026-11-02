@@ -1,0 +1,48 @@
+﻿@model IEnumerable<front_end_web.Models.Events.EventViewModel>
+@{
+    ViewData["Title"] = "Manage Events";
+}
+<div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h1 class="fw-bold">Manage Events</h1>
+            <p class="text-muted mb-0">Create and manage your race events.</p>
+        </div>
+        <a asp-action="CreateEvent" class="btn btn-warning">+ Create Event</a>
+    </div>
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark"><tr><th>Event</th><th>Category</th><th>Date</th><th>Route</th><th>Distance</th><th>Actions</th></tr></thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.Title</strong><div class="small text-muted">@item.StartLocation → @item.EndLocation</div></td>
+                        <td>@(item.CategoryTitle ?? $"Category #{item.CategoryId}")</td>
+                        <td>@item.Date.ToString("dd MMM yyyy") at @item.StartTime.ToString(@"hh\:mm")</td>
+                        <td>@(item.RouteName ?? $"Route #{item.RouteId}")</td>
+                        <td>@item.Distance km</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a asp-action="EditEvent" asp-route-id="@item.EventId" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="DeleteEvent" asp-route-id="@item.EventId" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No events found. Create your first event.</div>
+    }
+</div>

@@ -1,0 +1,71 @@
+﻿@model List<front_end_web.Models.Organiser.OrganiserResultViewModel>
+
+@{
+    ViewData["Title"] = "Race Results";
+}
+
+<section class="container py-5">
+    <span class="section-label">ORGANISER PORTAL</span>
+    <h1 class="fw-bold">Race Results</h1>
+    <p class="text-muted">
+        Prepare and publish finishing times and positions.
+    </p>
+
+    <div class="alert alert-info">
+        The results interface is prepared. To save and publish results,
+        connect it to your API's result creation and publishing endpoints.
+    </div>
+
+    <div class="table-responsive bg-white border rounded-3">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Participant</th>
+                    <th>Event</th>
+                    <th>Position</th>
+                    <th>Finish Time</th>
+                    <th>Publication</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            No results have been loaded.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.ParticipantName</td>
+                            <td>@result.EventName</td>
+                            <td>@result.Position</td>
+                            <td>@result.FinishTime</td>
+                            <td>
+                                @if (result.Published)
+                                {
+                                    <span class="badge bg-success">
+                                        Published
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Draft
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a asp-action="Dashboard"
+       class="btn btn-outline-dark mt-4">Back to Dashboard</a>
+</section>

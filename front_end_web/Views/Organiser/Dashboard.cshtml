@@ -1,0 +1,169 @@
+﻿@model front_end_web.Models.Organiser.OrganiserDashboardViewModel
+
+@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<section class="container py-5">
+    <div class="d-flex flex-wrap justify-content-between
+        align-items-center gap-3 mb-4">
+        <div>
+            <span class="section-label">RACEDAY ORGANISER</span>
+            <h1 class="fw-bold">
+                Welcome back, @Model.OrganiserName
+            </h1>
+            <p class="text-muted">
+                Manage your races, participants and results.
+            </p>
+        </div>
+
+        <a asp-controller="Organiser"
+           asp-action="Events"
+           class="btn btn-raceday">
+            <i class="bi bi-plus-lg me-2"></i>Create or Manage Events
+        </a>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-warning" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <div class="row g-4 mb-5">
+        <div class="col-sm-6 col-xl-4">
+            <div class="organiser-stat-card">
+                <div class="organiser-stat-icon">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+                <p>Total Events</p>
+                <h2>@Model.TotalEvents</h2>
+                <span>Events in the API response</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="organiser-stat-card">
+                <div class="organiser-stat-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+                <p>Total Enrolments</p>
+                <h2>@Model.TotalEnrolments</h2>
+                <span>Enrolments returned by the API</span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="organiser-stat-card">
+                <div class="organiser-stat-icon">
+                    <i class="bi bi-flag"></i>
+                </div>
+                <p>Upcoming Events</p>
+                <h2>@Model.UpcomingEvents</h2>
+                <span>Events scheduled for today or later</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h3 class="fw-bold mb-1">Upcoming Races</h3>
+            <p class="text-muted mb-0">
+                Your next scheduled events.
+            </p>
+        </div>
+
+        <a asp-controller="Organiser"
+           asp-action="Events"
+           class="auth-link">View all</a>
+    </div>
+
+    <div class="table-responsive bg-white rounded-3 border">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Distance</th>
+                    <th>Enrolments</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Events.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <i class="bi bi-calendar2-x fs-2 text-muted"></i>
+                            <p class="mt-2 mb-0">
+                                No upcoming events were found.
+                            </p>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model.Events)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@item.Name</td>
+                            <td>@item.Date.ToString("dd MMM yyyy")</td>
+                            <td>@item.Location</td>
+                            <td>@item.Distance.ToString("0.##") km</td>
+                            <td>
+                                <span class="badge bg-primary">
+                                    @item.EnrolmentCount
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-controller="Organiser"
+                                   asp-action="Events"
+                                   class="btn btn-sm btn-outline-dark">
+                                    Manage
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="fw-bold mt-5 mb-3">Management Shortcuts</h3>
+
+    <div class="row g-3">
+        <div class="col-md-6 col-xl-3">
+            <a asp-action="Events" class="organiser-shortcut">
+                <i class="bi bi-calendar-plus"></i>
+                <strong>Manage Events</strong>
+                <span>Create and maintain races</span>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <a asp-action="Categories" class="organiser-shortcut">
+                <i class="bi bi-tags"></i>
+                <strong>Categories</strong>
+                <span>Configure race categories</span>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <a asp-action="Enrolments" class="organiser-shortcut">
+                <i class="bi bi-people"></i>
+                <strong>Enrolments</strong>
+                <span>Review registered participants</span>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <a asp-action="Results" class="organiser-shortcut">
+                <i class="bi bi-trophy"></i>
+                <strong>Race Results</strong>
+                <span>Manage finishing times and positions</span>
+            </a>
+        </div>
+    </div>
+</section>

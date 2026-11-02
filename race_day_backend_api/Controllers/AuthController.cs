@@ -19,13 +19,10 @@ namespace race_day_backend_api.Controllers
         private readonly IConfiguration _configuration;
         private readonly PasswordHasher<UserAccount> _passwordHasher;
 
-        public AuthController(
-            ApplicationDbContext context,
-            IConfiguration configuration)
+        public AuthController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
-
             _passwordHasher = new PasswordHasher<UserAccount>();
         }
 

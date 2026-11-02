@@ -1,0 +1,38 @@
+﻿@model IEnumerable<front_end_web.Models.Events.ParticipantEnrolmentViewModel>
+@{
+    ViewData["Title"] = "My Enrolments";
+}
+<div class="container py-4">
+    <h1 class="fw-bold">My Enrolments</h1>
+    <p class="text-muted">Events you have joined.</p>
+    @if (TempData["Success"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark"><tr><th>Event</th><th>Category</th><th>Date</th><th>Time</th><th>Route</th><th>Enrolled on</th></tr></thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EventTitle</td>
+                        <td>@(item.CategoryTitle ?? "—")</td>
+                        <td>@(item.EventDate?.ToString("dd MMM yyyy") ?? "—")</td>
+                        <td>@(item.StartTime?.ToString(@"hh\:mm") ?? "—")</td>
+                        <td>@(item.StartLocation ?? "—") → @(item.EndLocation ?? "—")</td>
+                        <td>@item.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">You have not enrolled in any events yet. <a asp-action="Index" class="alert-link">Browse events</a>.</div>
+    }
+</div>

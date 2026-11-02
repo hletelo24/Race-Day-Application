@@ -1,0 +1,59 @@
+﻿@model front_end_web.Models.Organiser.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<section class="container py-5 category-page">
+    <div class="category-form-card">
+        <div class="category-form-heading">
+            <div class="category-delete-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+
+            <span class="category-eyebrow">CATEGORY MANAGEMENT</span>
+            <h1 class="fw-bold mt-2">Delete Category</h1>
+            <p class="text-muted">
+                Please confirm that you want to delete this category.
+            </p>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Warning:</strong> Deleting a category may be restricted
+            if events still reference it.
+        </div>
+
+        <dl class="row category-details">
+            <dt class="col-sm-4">Category ID</dt>
+            <dd class="col-sm-8">@Model.CategoryId</dd>
+
+            <dt class="col-sm-4">Title</dt>
+            <dd class="col-sm-8 fw-semibold">@Model.Title</dd>
+
+            <dt class="col-sm-4">Description</dt>
+            <dd class="col-sm-8">
+                @(string.IsNullOrWhiteSpace(Model.Description)
+                    ? "No description"
+                    : Model.Description)
+            </dd>
+        </dl>
+
+        <form asp-controller="Organiser"
+              asp-action="DeleteCategory"
+              asp-route-id="@Model.CategoryId"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash me-2"></i>Confirm Delete
+                </button>
+
+                <a asp-action="Categories"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>

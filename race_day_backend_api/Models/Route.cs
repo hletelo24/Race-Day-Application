@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace race_day_backend_api.Models
 {
@@ -19,6 +20,7 @@ namespace race_day_backend_api.Models
         public string? ImageUrl { get; set; }
 
         // Navigation
+        [JsonIgnore]
         public ICollection<Event> Events { get; set; }
             = new List<Event>();
     }

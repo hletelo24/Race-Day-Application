@@ -1,0 +1,43 @@
+﻿@model front_end_web.Models.Events.EventViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+<div class="container py-4">
+    @if (TempData["Error"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">&larr; Back to events</a>
+    @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+    {
+        <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid rounded mb-4 w-100" style="max-height:380px;object-fit:cover;" />
+    }
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <span class="badge text-bg-warning mb-2">@(Model.CategoryTitle ?? $"Category #{Model.CategoryId}")</span>
+            <h1 class="fw-bold">@Model.Title</h1>
+            <p>@Model.Description</p>
+            <hr />
+            <p><strong>Date:</strong> @Model.Date.ToString("dddd, dd MMMM yyyy")</p>
+            <p><strong>Start time:</strong> @Model.StartTime.ToString(@"hh\:mm")</p>
+            <p><strong>Distance:</strong> @Model.Distance km</p>
+            <p><strong>Start:</strong> @Model.StartLocation</p>
+            <p><strong>Finish:</strong> @Model.EndLocation</p>
+            <p><strong>Route:</strong> @(Model.RouteName ?? $"Route #{Model.RouteId}")</p>
+
+            @if (string.Equals(Context.Session.GetString("UserRole"), "Participant", StringComparison.OrdinalIgnoreCase))
+            {
+                <form asp-action="Enrol" method="post" class="mt-4">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="EventId" value="@Model.EventId" />
+                    <button type="submit" class="btn btn-warning btn-lg">Enrol in this event</button>
+                </form>
+                <p class="small text-muted mt-2">Your enrolment will use this event's assigned category and route.</p>
+            }
+            else
+            {
+                <a asp-controller="Auth" asp-action="Login" class="btn btn-warning mt-3">Sign in as a participant to enrol</a>
+            }
+        </div>
+    </div>
+</div>

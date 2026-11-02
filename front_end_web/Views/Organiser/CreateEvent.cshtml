@@ -1,0 +1,111 @@
+﻿@model front_end_web.Models.Events.EventViewModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="container py-4">
+    <h1 class="fw-bold mb-2">Create Event</h1>
+    <p class="text-muted mb-4">Enter event details and upload a banner image.</p>
+
+    <form asp-action="CreateEvent" method="post" enctype="multipart/form-data"
+          class="card border-0 shadow-sm rounded-4">
+        @Html.AntiForgeryToken()
+        <div class="card-body p-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CategoryId" class="form-label">Category</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+                        <option value="">Select category</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RouteId" class="form-label">Route</label>
+                    <select asp-for="RouteId" asp-items="ViewBag.Routes" class="form-select">
+                        <option value="">Select route</option>
+                    </select>
+                    <span asp-validation-for="RouteId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Date" class="form-label"></label>
+                    <input asp-for="Date" type="date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StartTime" class="form-label"></label>
+                    <input name="StartTime" type="time"
+                           value="@Model.StartTime.ToString(@"hh\:mm")" class="form-control" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StartLocation" class="form-label"></label>
+                    <input asp-for="StartLocation" class="form-control" />
+                    <span asp-validation-for="StartLocation" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EndLocation" class="form-label"></label>
+                    <input asp-for="EndLocation" class="form-control" />
+                    <span asp-validation-for="EndLocation" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Distance" class="form-label">Distance (km)</label>
+                    <input asp-for="Distance" type="number" min="0.1" step="0.1" class="form-control" />
+                    <span asp-validation-for="Distance" class="text-danger"></span>
+                </div>
+            </div>
+            <hr />
+            <h5>Event banner</h5>
+            <div class="mb-3">
+                <label asp-for="BannerImage" class="form-label">Choose banner image</label>
+                <input asp-for="BannerImage" id="bannerInput" type="file"
+                       accept=".jpg,.jpeg,.png,.webp" class="form-control" />
+                <span asp-validation-for="BannerImage" class="text-danger"></span>
+                <small class="text-muted">JPG, PNG or WEBP. Maximum 5 MB.</small>
+            </div>
+            <div id="previewContainer" class="mb-3 d-none">
+                <img id="bannerPreview" alt="Banner preview" class="img-fluid rounded-3"
+                     style="width:100%;max-height:350px;object-fit:cover" />
+            </div>
+            <button type="submit" class="btn btn-warning">Create Event</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const input = document.getElementById("bannerInput");
+        const preview = document.getElementById("bannerPreview");
+        const container = document.getElementById("previewContainer");
+        let previewUrl;
+        input.addEventListener("change", () => {
+            const file = input.files[0];
+            if (!file) return;
+            const valid = ["image/jpeg", "image/png", "image/webp"];
+            if (!valid.includes(file.type) || file.size > 5 * 1024 * 1024) {
+                alert("Choose a JPG, PNG or WEBP image no larger than 5 MB.");
+                input.value = "";
+                container.classList.add("d-none");
+                return;
+            }
+            if (previewUrl) URL.revokeObjectURL(previewUrl);
+            previewUrl = URL.createObjectURL(file);
+            preview.src = previewUrl;
+            container.classList.remove("d-none");
+        });
+    </script>
+}

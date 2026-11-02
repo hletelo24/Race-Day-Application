@@ -1,0 +1,70 @@
+﻿@model List<front_end_web.Models.Organiser.OrganiserEnrolmentViewModel>
+
+@{
+    ViewData["Title"] = "Participant Enrolments";
+}
+
+<section class="container py-5">
+    <span class="section-label">ORGANISER PORTAL</span>
+    <h1 class="fw-bold">Participant Enrolments</h1>
+    <p class="text-muted">
+        Review participants and their enrolment statuses.
+    </p>
+
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-warning">@error</div>
+    }
+
+    <div class="table-responsive bg-white border rounded-3">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Participant ID</th>
+                    <th>Event</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            No enrolments are available.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        var statusClass = item.Status.Equals(
+                            "Confirmed",
+                            StringComparison.OrdinalIgnoreCase)
+                            ? "bg-success"
+                            : item.Status.Equals(
+                                "Pending",
+                                StringComparison.OrdinalIgnoreCase)
+                                ? "bg-warning text-dark"
+                                : "bg-secondary";
+
+                        <tr>
+                            <td>@item.ParticipantId</td>
+                            <td>@item.EventName</td>
+                            <td>@item.CategoryName</td>
+                            <td>
+                                <span class="badge @statusClass">
+                                    @item.Status
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a asp-action="Dashboard"
+       class="btn btn-outline-dark mt-4">Back to Dashboard</a>
+</section>
