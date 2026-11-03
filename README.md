@@ -1,4 +1,4 @@
-# Race-Day-Website
+# Race-Day-Application
 Race Day is modern website that brings sporting events and participants together in fully online experience. The website is built to allow participants to join events and be a part of sporting action around the coutry.
 ## Overview of the website
 Race Day is powerful online platform that brings events and participants together in a seamless experience. The website is developed to perform the following functions
@@ -31,6 +31,16 @@ At this stage of the website's development phase, there are GitHub actions that 
 The following screenshot shows output of a successful build action run on GitHub actions.
 
 <img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%202026-09-03%20151216.png" alt="Screenshot of successful action build"/>
+
+## Unit Testing
+The application has been integrated with unit tests using xUnit. These unit tests are meant to test the API endpoints to ensure that the endpoints function correctly. The following screenshot shows the API unit tests running locally:
+
+<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%20(22).png" alt="Screenshot of local unit testing"/>
+
+## Unit testing - CI/CD GitHub Workflows
+This repository makes use of GitHub workflows to automate unit testing. This makes the unit tests to run automatically in when new commits are created on the repository. The following screenshot clearly shows the tests running after CI/CD execution:
+
+<img src="https://github.com/hletelo24/Race-Day-Application/blob/main/docs/Screenshot%20(23).png" alt="Screenshot of local unit testing"/>
 
 ## Database implementation
 The website has been connected to an SQL database that uses a Microsoft SQL Server engine. A complete database generation script has been generated and is accessible in the docs folder of the repository. The execution screenshot has been placed below:
