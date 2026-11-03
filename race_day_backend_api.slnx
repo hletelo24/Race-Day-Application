@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="race_app_api_test/race_app_api_test.csproj" Id="0a2ce182-5579-4754-853a-845221cb6ae5" />
   <Project Path="front_end_web/front_end_web.csproj" Id="92bd7fc2-c359-4d17-a719-b290df529216" />
+  <Project Path="race_app_api_test/race_app_api_test.csproj" />
   <Project Path="race_day_backend_api/race_day_backend_api.csproj" />
 </Solution>
