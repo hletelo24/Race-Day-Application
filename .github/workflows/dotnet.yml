@@ -24,5 +24,7 @@ jobs:
       run: dotnet restore ./race_day_backend_api.slnx
     - name: Build
       run: dotnet build ./race_day_backend_api.slnx --no-restore
+    - name: FrontEndBuild
+      run: dotnet build ./front_end_web/front_end_web.csproj --no-restore
     - name: Test
       run: dotnet test ./race_app_api_test/race_app_api_test.csproj --no-build --verbosity normal
